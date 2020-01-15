@@ -27,5 +27,4 @@ else
 {
 	echo "method not allowed";
 }
-
 ?>
