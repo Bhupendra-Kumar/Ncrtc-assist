@@ -14,7 +14,7 @@ if (!$connection) {
 $dbname = 'ncrtc';
 $dbuser = 'root';
 $dbpass = 'bJdHRPpPK1vn';
-$dbhost = 'localhost';
+$dbhost = '146.148.95.31';
 $connection = mysqli_connect($dbhost, $dbuser, $dbpass) or die("Unable to Connect to '$dbhost'");
 mysqli_select_db($connection, $dbname) or die("Could not open the db '$dbname'");
 ?>
