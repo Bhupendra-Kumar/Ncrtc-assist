@@ -13,11 +13,11 @@ if($method == 'POST'){
 	{
 		$sql="Select * from emp where Empname LIKE '%$Empname%' ";
 		$result = mysqli_query($connection, $sql) or die("Error " . mysqli_error($connection));
-        $row = mysqli_fetch_array($result,MYSQLI_ASSOC);
-        $Mobile = $row['Mobile'];
+        	$row = mysqli_fetch_array($result,MYSQLI_ASSOC);
+        	$Mobile = $row['Mobile'];
 		$Intercome = $row['Intercome'];
 		$telephone = $row['telephone'];
-		$speech = "Mobile Number is ".$Mobile." , Intercome Number is ".$Intercome." , Telephone Number is ".$telephone;
+		//$speech = "Mobile Number is ".$Mobile." , Intercome Number is ".$Intercome." , Telephone Number is ".$telephone;
 	}
 	else 
 	{
