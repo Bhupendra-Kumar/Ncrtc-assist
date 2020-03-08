@@ -13,8 +13,8 @@ if (!$connection) {
 <?php
 $dbname = 'ncrtc';
 $dbuser = 'root';
-$dbpass = 'bJdHRPpPK1vn';
-$dbhost = '146.148.95.31';
+$dbpass = 'Ncrtc$2020';
+$dbhost = '3.6.253.46';
 $connection = mysqli_connect($dbhost, $dbuser, $dbpass) or die("Unable to Connect to '$dbhost'");
 mysqli_select_db($connection, $dbname) or die("Could not open the db '$dbname'");
 ?>
