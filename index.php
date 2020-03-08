@@ -1,4 +1,3 @@
-<?php include("DB.php"); ?>
 <?php 
 $method = $_SERVER['REQUEST_METHOD'];
 
