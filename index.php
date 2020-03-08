@@ -1,4 +1,5 @@
 <?php 
+
 $method = $_SERVER['REQUEST_METHOD'];
 
 // Process only when method is POST
@@ -6,43 +7,51 @@ if($method == 'POST'){
 	header('Content-Type: application/json');
 	$requestBody = file_get_contents("php://input");
 	$json = json_decode($requestBody, true);
-	$Empname = $json["queryResult"]["parameters"]["Empname"];
-	$NumberType = $json["queryResult"]["parameters"]["Numbertype"];
-// 	$sql="Select * from emp where empname LIKE '%$Empname%' ";
-// 	$result = mysqli_query($connection, $sql) or die("Error " . mysqli_error($connection));
-//         $row = mysqli_fetch_array($result,MYSQLI_ASSOC);
-	$speech = "api working fine";
-	
-// 	if(($Empname != "" && $Empname != null) && ($NumberType != "" && $NumberType != null))
-// 	{
-// 		$sql="Select * from emp where empname LIKE '%$Empname%' ";
-// 		$result = mysqli_query($connection, $sql) or die("Error " . mysqli_error($connection));
-//         	$row = mysqli_fetch_array($result,MYSQLI_ASSOC);
-//         	$Mobile = $row['mobile'];
-// 		$Intercome = $row['intercome'];
-// 		$telephone = $row['telephone'];
-// 		$speech = "Mobile Number is ".$Mobile." , Intercome Number is ".$Intercome." , Telephone Number is ".$telephone;
-// 	}
-// 	else 
-// 	{
-// 		if(($Empname != "" && $Empname != null) && ($NumberType == "" || $NumberType == null))
-// 		{
-// 			$speech = "which type of number you want intercom number , telephone number or mobile number";
-// 		}		
-// 		else
-// 		{
-// 			if(($Empname == "" || $Empname == null) && ($NumberType != "" && $NumberType != null))
-// 			{
-// 				$speech = "which type of number you want intercom number , telephone number or mobile number";
-// 			}
-// 			else
-// 			{
-// 				$speech = "May i have the employee name please";
-// 			}
-// 		}
-// 	}
+	$HospitalName = $json["queryResult"]["parameters"]["HospitalName"];
+	$appointment = $json["queryResult"]["parameters"]["appointment"];
+	$DoctorName = $json["queryResult"]["parameters"]["DoctorName"];
+	$Time = $json["queryResult"]["parameters"]["Time"];
+	$text = $json["queryResult"]["parameters"]["text"];
+	if($HospitalName != "" && $HospitalName != null)
+	{
+		$speech = "Yes this is ".$HospitalName." How can help you";
+	}
+	else if(($appointment != "" && $appointment != null) && ($DoctorName != "" && $DoctorName != null) && ($Time != "" && $Time != null))
+	{
+		$speech = "Yes sure, its my plesure, your appointment has been booked with doctor ".$DoctorName." At ".$Time.", Thank you";
+	}
+	else if(($appointment != "" && $appointment != null) && ($DoctorName != "" && $DoctorName != null))
+	{
+		$speech = "Yes sure, its my plesure, your appointment has been booked with doctor ".$DoctorName.", Thank you";
+	}
+	else if(($appointment != "" && $appointment != null))
+	{
+		$speech = "Yes sure, its my plesure, your appointment has been booked, Thank you";
+	}
+	else
+	{
+	switch ($text) {
+		case "hi":
+			$speech = "Hi, Nice to meet you"; 
+			break;
+
+		case "bye":
+			$speech = "Bye, good night";
+			break;
+
+		case "anything":
+			$speech = "Yes, you can type anything here.";
+			break;
+		
+		default:
+			$speech = $text;
+			break;
+	}
+	}
 
 	$response = new \stdClass();
+	//$response->speech = $speech."/".$appointment."/".$DoctorName."/".$Time;
+	//$response->displayText = $speech;
 	$response->fulfillmentText = $speech;
 	$response->displayText = $speech;
 	$response->source = "General";
@@ -50,6 +59,7 @@ if($method == 'POST'){
 }
 else
 {
-	echo "method not allowed";
+	echo "Method not allowed";
 }
+
 ?>
